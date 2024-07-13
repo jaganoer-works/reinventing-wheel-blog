@@ -8,36 +8,43 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase";
+import { Metadata } from "next";
 
-// これはダミーデータです。実際のアプリケーションではデータベースやAPIから取得します。
-const blogPosts = [
-  {
-    slug: "why-i-started-making-os",
-    title: "OSを作り始めた理由",
-    date: "2024-07-10",
-    summary:
-      "なぜOSを自作することにしたのか、その動機と目標について書きました。",
-  },
-  {
-    slug: "calculator-day-1",
-    title: "新しい言語での電卓作成 - 1日目",
-    date: "2024-07-05",
-    summary:
-      "新しい言語を学ぶために電卓を作り始めました。初日の苦労と発見を共有します。",
-  },
-  // 他のブログ記事を追加...
-];
+export const metadata: Metadata = {
+  title: "ブログ記事一覧 | 車輪の再発明.com",
+  description: "技術の深い理解を目指すエンジニアのブログ記事一覧",
+};
 
-export default function BlogPage() {
+async function getBlogPosts() {
+  const { data, error } = await supabase
+    .from("blog_posts")
+    .select("*")
+    .eq("is_published", true)
+    .order("published_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching blog posts:", error);
+    return [];
+  }
+
+  return data;
+}
+
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts();
+
   return (
     <div className="container py-8">
       <h1 className="text-3xl font-bold mb-6">ブログ記事一覧</h1>
       <div className="space-y-6">
         {blogPosts.map((post) => (
-          <Card key={post.slug}>
+          <Card key={post.id}>
             <CardHeader>
               <CardTitle>{post.title}</CardTitle>
-              <CardDescription>{post.date}</CardDescription>
+              <CardDescription>
+                {new Date(post.published_at).toLocaleDateString()}
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <p>{post.summary}</p>

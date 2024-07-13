@@ -7,23 +7,32 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase";
+import { Metadata } from "next";
 
-// これはダミーデータです。実際のアプリケーションではデータベースやAPIから取得します。
-const projects = [
-  {
-    slug: "self-made-os",
-    title: "自作OS",
-    description: "ゼロからOSを作る挑戦",
-  },
-  {
-    slug: "calculator-in-new-lang",
-    title: "新言語で電卓",
-    description: "プログラミング言語の基礎を学ぶ",
-  },
-  // 他のプロジェクトを追加...
-];
+export const metadata: Metadata = {
+  title: 'プロジェクト一覧 | 車輪の再発明.com',
+  description: '技術の深い理解を目指すエンジニアのプロジェクト一覧',
+}
 
-export default function ProjectsPage() {
+
+async function getProjects() {
+  const { data, error } = await supabase
+    .from("projects")
+    .select("*")
+    .eq("is_published", true)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching projects:", error);
+    return [];
+  }
+
+  return data;
+}
+
+export default async function ProjectsPage() {
+  const projects = await getProjects();
   return (
     <div className="container py-8">
       <h1 className="text-3xl font-bold mb-6">プロジェクト一覧</h1>
