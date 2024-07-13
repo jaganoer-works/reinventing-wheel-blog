@@ -10,10 +10,7 @@ const Navigation = () => (
   <NavigationMenu>
     <NavigationMenuList>
       <NavigationMenuItem>
-        <NavigationMenuLink
-          className={navigationMenuTriggerStyle()}
-          href="#home"
-        >
+        <NavigationMenuLink className={navigationMenuTriggerStyle()} href="/">
           ホーム
         </NavigationMenuLink>
       </NavigationMenuItem>
@@ -28,7 +25,7 @@ const Navigation = () => (
       <NavigationMenuItem>
         <NavigationMenuLink
           className={navigationMenuTriggerStyle()}
-          href="#projects"
+          href="/project"
         >
           プロジェクト
         </NavigationMenuLink>
@@ -36,7 +33,7 @@ const Navigation = () => (
       <NavigationMenuItem>
         <NavigationMenuLink
           className={navigationMenuTriggerStyle()}
-          href="#blog"
+          href="/blog"
         >
           ブログ
         </NavigationMenuLink>

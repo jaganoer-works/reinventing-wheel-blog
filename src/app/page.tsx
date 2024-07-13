@@ -17,7 +17,7 @@ export default function Home() {
       </p>
       <div className="flex space-x-4">
         <Button asChild>
-          <Link href="/projects">プロジェクトを見る</Link>
+          <Link href="/project">プロジェクトを見る</Link>
         </Button>
         <Button asChild variant="outline">
           <Link href="/blog">ブログを読む</Link>
