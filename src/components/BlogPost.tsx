@@ -8,7 +8,13 @@ import {
   CardTitle,
 } from "./ui/card";
 
-const BlogPost = ({ title, date, summary }) => (
+interface BlogPostProps {
+  title: string;
+  date: string;
+  summary: string;
+}
+
+const BlogPost = ({ title, date, summary }: BlogPostProps) => (
   <Card>
     <CardHeader>
       <CardTitle>{title}</CardTitle>

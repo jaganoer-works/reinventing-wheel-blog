@@ -7,7 +7,13 @@ import {
   CardTitle,
 } from "./ui/card";
 
-const ProjectCard = ({ title, description, link }) => (
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  link: string;
+}
+
+const ProjectCard = ({ title, description, link }: ProjectCardProps) => (
   <Card>
     <CardHeader>
       <CardTitle>{title}</CardTitle>
