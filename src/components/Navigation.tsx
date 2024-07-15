@@ -25,14 +25,6 @@ const Navigation = () => (
       <NavigationMenuItem>
         <NavigationMenuLink
           className={navigationMenuTriggerStyle()}
-          href="/project"
-        >
-          プロジェクト
-        </NavigationMenuLink>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <NavigationMenuLink
-          className={navigationMenuTriggerStyle()}
           href="/blog"
         >
           ブログ
