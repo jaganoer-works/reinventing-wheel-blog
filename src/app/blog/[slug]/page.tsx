@@ -75,7 +75,7 @@ export default async function BlogPostPage({
 
   return (
     <div className="container py-8">
-      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+      <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
       <p className="text-gray-500 mb-4">
         {new Date(post.published_at).toLocaleDateString()}
       </p>
