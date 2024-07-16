@@ -5,17 +5,18 @@ import Home from "./page";
 
 // Next.jsのメタデータをモック
 jest.mock("next/head", () => {
-  return {
-    // __esModule: true,
-    default: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-  };
+  const Head = ({ children }: { children: React.ReactNode }) => <>{children}</>;
+  Head.displayName = "Head";
+  return Head;
 });
 
 // Linkコンポーネントをモック
 jest.mock("next/link", () => {
-  return ({ children, href }: { children: React.ReactNode; href: string }) => (
+  const Link = ({ children, href }: { children: React.ReactNode; href: string }) => (
     <a href={href}>{children}</a>
   );
+  Link.displayName = "Link";
+  return Link;
 });
 
 describe("Home", () => {
